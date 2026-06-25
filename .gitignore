@@ -1,0 +1,14 @@
+# Entorno
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Secretos y base de datos local
+.env
+*.db
+*.sqlite3
+
+# Editor
+.vscode/
+.idea/

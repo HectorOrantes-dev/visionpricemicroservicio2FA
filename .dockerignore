@@ -1,0 +1,19 @@
+# Entorno y caché
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Secretos y BD local (se configuran como variables en Railway)
+.env
+*.db
+*.sqlite3
+
+# Git y editor
+.git/
+.gitignore
+.vscode/
+.idea/
+
+# Docs
+README.md
