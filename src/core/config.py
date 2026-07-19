@@ -44,6 +44,15 @@ class Settings(BaseSettings):
     # Ej. para un frontend web: "https://app.visionprice.com,https://admin.visionprice.com"
     allowed_origins: str = ""
 
+    # --- API Gateway (tráfico entrante vía el gateway) ---
+    # Fase OPCIONAL: si está vacío, no-op. Si está seteado, valida
+    # X-Gateway-Key CUANDO viene pero no lo exige todavía (dual-accept
+    # mientras el backend principal migra a llamar acá vía el gateway).
+    # IMPORTANTE: hoy este servicio no tiene NINGUNA autenticación en
+    # /2fa/send ni /2fa/verify — configurar esto es el primer paso real
+    # para cerrar ese hueco.
+    gateway_shared_key: str = ""
+
     @property
     def cors_origins(self) -> list[str]:
         return [o.strip() for o in self.allowed_origins.split(",") if o.strip()]

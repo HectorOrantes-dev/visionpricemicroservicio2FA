@@ -14,6 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from src.core.config import settings
 from src.core.database import init_db
+from src.core.gateway_key import GatewayKeyMiddleware
 from src.feature.oauth.infraestructure.routers.oauth_router import (
     router as oauth_router,
 )
@@ -44,6 +45,11 @@ app.add_middleware(
     allow_methods=["POST", "GET"],
     allow_headers=["*"],
 )
+
+# Gateway: hoy opcional (ver src/core/gateway_key.py) — valida el header si
+# viene, no lo exige todavía. Es el primer paso para dejar de aceptar
+# /2fa/send y /2fa/verify de cualquiera en internet.
+app.add_middleware(GatewayKeyMiddleware)
 
 app.include_router(two_factor_router)
 app.include_router(oauth_router)
