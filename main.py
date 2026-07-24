@@ -15,6 +15,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.core.config import settings
 from src.core.database import init_db
 from src.core.gateway_key import GatewayKeyMiddleware
+from src.feature.correo.infraestructure.routers.correo_router import (
+    router as correo_router,
+)
 from src.feature.oauth.infraestructure.routers.oauth_router import (
     router as oauth_router,
 )
@@ -53,6 +56,7 @@ app.add_middleware(GatewayKeyMiddleware)
 
 app.include_router(two_factor_router)
 app.include_router(oauth_router)
+app.include_router(correo_router)
 
 
 @app.get("/health", tags=["health"])
